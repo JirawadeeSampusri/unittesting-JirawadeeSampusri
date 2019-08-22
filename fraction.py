@@ -13,30 +13,42 @@ class Fraction:
         """Initialize a new fraction with the given numerator
            and denominator (default 1).
         """
-        self.numerator = numerator
-        self.denominator = denominator
+        self.gcd = math.gcd(numerator, denominator)
+        self.numerator = int(numerator/self.gcd)
+        self.denominator = int(denominator/self.gcd)
+        if self.denominator < 0:
+            self.numerator = self.numerator * -1
+            self.denominator = abs(self.denominator)
+       
 
-    #TODO Write the __add__ method, and remove this TODO comment.
     def __add__(self, frac):
         """Return the sum of two fractions as a new fraction.
            Use the standard formula  a/b + c/d = (ad+bc)/(b*d)
         """
         numerator =   (self.numerator * frac.denominator)+(self.denominator*frac.numerator)
         denominator =   self.denominator * frac.denominator
-        gcd_num = math.gcd(numerator,denominator)
-        numerator/= gcd_num
-        denominator /= gcd_num
+        return Fraction(numerator, denominator)
+    
+    def __sub__(self, frac):
+        """Return the sum of two fractions as a new fraction.
+           Use the standard formula  a/b - c/d = (ad-bc)/(b*d)
+        """
+        numerator =   (self.numerator * frac.denominator) - (self.denominator*frac.numerator)
+        denominator =   self.denominator * frac.denominator
         return Fraction(numerator, denominator)
 
 
     def __mul__(self,frac):
-        numerator = self.numerator*frac.numerator
-        denominator = self.denominator*frac.denominator
-        gcd_num = math.gcd(numerator,denominator)
-        numerator/= gcd_num
-        denominator /= gcd_num 
+        numerator = self.numerator * frac.numerator
+        denominator = self.denominator * frac.denominator
         return Fraction(numerator, denominator)
+ 
 
+    def __str__(self):
+        if self.denominator==1:
+            return f"{self.numerator}"
+        else:
+            return f"{self.numerator}/{self.denominator}"
 
 
     def __eq__(self, frac):
@@ -44,13 +56,14 @@ class Fraction:
            Fractions are stored in proper form so the internal representation
            is unique (3/6 is same as 1/2).
         """
-        gcd_num1 = math.gcd(self.numerator,self.denominator)
-        self.numerator/= gcd_num1
-        self.denominator /= gcd_num1
-        gcd_num2 = math.gcd(self.numerator,self.denominator)
-        frac.numerator/= gcd_num2
-        frac.denominator /= gcd_num2
+    
         return self.numerator == frac.numerator and self.denominator == frac.denominator
 
-    def __repr__(self):
-        return"{}/{}".format(int(self.numerator),int(self.denominator))
+    def __gt__(self,frac):
+        if (self.numerator / self.denominator) > (frac.numerator / frac.denominator):
+            return True
+        else:
+            return False
+    
+
+    

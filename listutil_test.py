@@ -15,10 +15,6 @@ class ListUtilTest(unittest.TestCase):
     def test_two_item_many_time_list(self):
         self.assertListEqual( ['a','b'], unique(['a','b','b','a']) )
     
-    def test_error_list(self):
-        self.assertListEqual( ['a'], unique(['a','b','b','a']) )
 
-
- 
 if __name__ == '__main__':
     unittest.main()

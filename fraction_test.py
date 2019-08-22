@@ -32,14 +32,50 @@ class FractionTest(unittest.TestCase):
     def test_add(self):
         # 3/4 = 2/3 + 1/12
         self.assertEqual(Fraction(3,4), Fraction(1,12)+Fraction(2,3))
+        # 2/3 = 1/6 + 1/2
+        self.assertEqual(Fraction(2,3), Fraction(1,6)+Fraction(1,2))
+        # 1/4 = 1/20 + 1/5
+        self.assertEqual(Fraction(1,4), Fraction(1,20)+Fraction(1,5))
+
+    def test_sub(self):
+        # 7/12 = 2/3 - 1/12
+        self.assertEqual(Fraction(7,12), Fraction(2,3)-Fraction(1,12))
+        # 1/3 = 1/2 - 1/6
+        self.assertEqual(Fraction(1,3), Fraction(1,2)-Fraction(1,6))
+        # 3/10 = 5/10 - 4/20
+        self.assertEqual(Fraction(3,10), Fraction(5,10)-Fraction(4,20))
+
+    def test_mul(self):
+        self.assertEqual(Fraction(1,30), Fraction(1,5) * Fraction(1,6))
+        self.assertEqual(Fraction(2,15), Fraction(2,3) * Fraction(1,5))
+        self.assertEqual(Fraction(10,13), Fraction(-1)  *  Fraction(-10,13,))
+       
 
     def test_eq(self):
         f = Fraction(1,2)
-        g = Fraction(-40,-80)
+        g = Fraction(-40,-80)     
         h = Fraction(10000,20001) # not quite 1/2
+        k = Fraction(0)
+        j = Fraction(1,0)
         self.assertTrue(f == g)
         self.assertTrue(f.__eq__(g))  # same thing
         self.assertFalse(f == h)
         self.assertFalse(f.__eq__(h))
-        #TODO write more tests using other cases.
-        # Consider special values like 0, 1/0, -1/0
+        self.assertFalse(k.__eq__(f))
+        self.assertFalse(j.__eq__(k))
+
+    def test_gt(self):
+        w = Fraction(2,3)
+        e = Fraction(1,3)
+        self.assertTrue(w > e)
+        self.assertTrue(w.__gt__(e))
+        q = Fraction(4,5)
+        r = Fraction(6,7)
+        self.assertFalse(q > r)
+        self.assertFalse(q.__gt__(r))
+        o = Fraction(7,19)
+        u = Fraction(21,31)
+        self.assertFalse(o > u)
+        self.assertFalse(o.__gt__(u))
+
+        
