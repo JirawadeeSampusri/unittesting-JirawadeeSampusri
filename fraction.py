@@ -60,10 +60,7 @@ class Fraction:
         return self.numerator == frac.numerator and self.denominator == frac.denominator
 
     def __gt__(self,frac):
-        if (self.numerator / self.denominator) > (frac.numerator / frac.denominator):
-            return True
-        else:
-            return False
+        return (self.numerator / self.denominator) > (frac.numerator / frac.denominator)
     
 
     
