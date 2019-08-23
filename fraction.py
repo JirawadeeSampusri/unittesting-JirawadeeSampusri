@@ -13,21 +13,29 @@ class Fraction:
         """Initialize a new fraction with the given numerator
            and denominator (default 1).
         """
-        self.gcd = math.gcd(numerator, denominator)
-        self.numerator = int(numerator/self.gcd)
-        self.denominator = int(denominator/self.gcd)
-        if self.denominator < 0:
-            self.numerator = self.numerator * -1
-            self.denominator = abs(self.denominator)
-       
 
+        if numerator == 0 and denominator ==0:
+            self.numerator = 0
+            self.denominator = 0
+        else:
+            math_gcd = math.gcd(numerator, denominator)
+            self.numerator = int(numerator/math_gcd)
+            self.denominator = int(denominator/math_gcd)
+            if denominator < 0:
+                 self.numerator = self.numerator*-1
+                 self.denominator = self.denominator*-1
+            
+            
     def __add__(self, frac):
         """Return the sum of two fractions as a new fraction.
            Use the standard formula  a/b + c/d = (ad+bc)/(b*d)
         """
         numerator =   (self.numerator * frac.denominator)+(self.denominator*frac.numerator)
         denominator =   self.denominator * frac.denominator
-        return Fraction(numerator, denominator)
+        
+        return Fraction(numerator,denominator)
+            
+        
     
     def __sub__(self, frac):
         """Return the sum of two fractions as a new fraction.
@@ -41,8 +49,9 @@ class Fraction:
     def __mul__(self,frac):
         numerator = self.numerator * frac.numerator
         denominator = self.denominator * frac.denominator
+        
         return Fraction(numerator, denominator)
- 
+        
 
     def __str__(self):
         if self.denominator==1:
@@ -58,6 +67,7 @@ class Fraction:
         """
     
         return self.numerator == frac.numerator and self.denominator == frac.denominator
+        
 
     def __gt__(self,frac):
         return (self.numerator / self.denominator) > (frac.numerator / frac.denominator)

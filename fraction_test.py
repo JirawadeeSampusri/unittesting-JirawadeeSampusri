@@ -10,9 +10,9 @@ class FractionTest(unittest.TestCase):
     def test_str(self):
         f = Fraction(3, -1)
         self.assertEqual("-3", f.__str__())
-        f = Fraction(0, 5)
-        self.assertEqual("0", f.__str__())
-        f = Fraction(60, 90)
+        f = Fraction(2, 0)
+        self.assertEqual("1/0", f.__str__())
+        f = Fraction(6, 9)
         self.assertEqual("2/3", f.__str__())
         f = Fraction(1500, 60)
         self.assertEqual("25", f.__str__())
@@ -22,7 +22,8 @@ class FractionTest(unittest.TestCase):
         self.assertEqual("-4", f.__str__())
         f = Fraction(36, -60)
         self.assertEqual("-3/5", f.__str__())
-        # Constructor should provide default denominator = 1
+        # Constructor should provide default denominato
+        # r = 1
         f = Fraction(99)
         self.assertEqual("99", f.__str__())
 
@@ -34,22 +35,37 @@ class FractionTest(unittest.TestCase):
         self.assertEqual(Fraction(3,4), Fraction(1,12)+Fraction(2,3))
         # 2/3 = 1/6 + 1/2
         self.assertEqual(Fraction(2,3), Fraction(1,6)+Fraction(1,2))
-        # 1/4 = 1/20 + 1/5
-        self.assertEqual(Fraction(1,4), Fraction(1,20)+Fraction(1,5))
+        # 1/0 = 0/3 + 3/0
+        self.assertEqual(Fraction(1,0), Fraction(0,3) + Fraction(3,0))
+        # 0/0 = 3/0 + 3/0
+        self.assertEqual(Fraction(0,0), Fraction(3,0) + Fraction(3,0))
+        # 0/0 = 3/0 + -3,0
+        self.assertEqual(Fraction(0,0), Fraction(3,0) + Fraction(-3,0))
 
     def test_sub(self):
         # 7/12 = 2/3 - 1/12
         self.assertEqual(Fraction(7,12), Fraction(2,3)-Fraction(1,12))
         # 1/3 = 1/2 - 1/6
         self.assertEqual(Fraction(1,3), Fraction(1,2)-Fraction(1,6))
-        # 3/10 = 5/10 - 4/20
-        self.assertEqual(Fraction(3,10), Fraction(5,10)-Fraction(4,20))
+        # 1/10 = 9/10 - 4/5
+        self.assertEqual(Fraction(1,10), Fraction(9,10)-Fraction(4,5))
+        # 0/0 = 3/0 - 2/0
+        self.assertEqual(Fraction(0,0), Fraction(3,0)-Fraction(2,0))
+        # 0/0 = 5/0 - 0/2
+        self.assertEqual(Fraction(1,0), Fraction(5,0)-Fraction(0,2))
 
     def test_mul(self):
+        # 1/30 = 1/5 * 1/6
         self.assertEqual(Fraction(1,30), Fraction(1,5) * Fraction(1,6))
-        self.assertEqual(Fraction(2,15), Fraction(2,3) * Fraction(1,5))
-        self.assertEqual(Fraction(10,13), Fraction(-1)  *  Fraction(-10,13,))
-       
+        # 1/21 = 2/7 * 1/6
+        self.assertEqual(Fraction(1,21), Fraction(2,7) * Fraction(1,6))
+        # 1/3 = 2/3 * 2/4
+        self.assertEqual(Fraction(1,3), Fraction(2,3) * Fraction(2,4))
+        # 1/0 = 3/0 * -1/4
+        self.assertEqual(Fraction(1,0), Fraction(2,0) * Fraction(4,6))
+        # 0/0 = 3/29 * 0/0
+        self.assertEqual(Fraction(0,0), Fraction(3,29) * Fraction(0,0))
+ 
 
     def test_eq(self):
         f = Fraction(1,2)
