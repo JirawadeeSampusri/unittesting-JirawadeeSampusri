@@ -2,6 +2,8 @@
 
 by Jirawadee Sampusri 6110545457
 
+[![Build Status](https://travis-ci.com/JirawadeeSampusri/unittesting-JirawadeeSampusri.svg?branch=master)](https://travis-ci.com/JirawadeeSampusri/unittesting-JirawadeeSampusri)
+
 
 ## Test Cases for unique
 
