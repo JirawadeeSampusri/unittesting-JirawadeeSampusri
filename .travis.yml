@@ -14,4 +14,3 @@ install:
  # script to run tests. Script can have many commands, one per line.
 script: 
   - python -m unittest discover -p "*_test.py"
-© 2019 GitHub, Inc.
