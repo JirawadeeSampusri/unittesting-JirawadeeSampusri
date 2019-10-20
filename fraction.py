@@ -30,6 +30,8 @@ class Fraction:
         """Return the sum of two fractions as a new fraction.
            Use the standard formula  a/b + c/d = (ad+bc)/(b*d)
         """
+        if self.denominator == 0 or frac.denominator ==0:
+            return math.nan
         numerator =   (self.numerator * frac.denominator)+(self.denominator*frac.numerator)
         denominator =   self.denominator * frac.denominator
         
@@ -41,12 +43,16 @@ class Fraction:
         """Return the sum of two fractions as a new fraction.
            Use the standard formula  a/b - c/d = (ad-bc)/(b*d)
         """
+        if self.denominator == 0 or frac.denominator ==0:
+            return math.nan
         numerator =   (self.numerator * frac.denominator) - (self.denominator*frac.numerator)
         denominator =   self.denominator * frac.denominator
         return Fraction(numerator, denominator)
 
 
     def __mul__(self,frac):
+        if self.denominator == 0 or frac.denominator ==0:
+            return math.nan
         numerator = self.numerator * frac.numerator
         denominator = self.denominator * frac.denominator
         
@@ -70,6 +76,8 @@ class Fraction:
         
 
     def __gt__(self,frac):
+        if self.denominator == 0 or frac.denominator ==0:
+            return math.nan
         return (self.numerator / self.denominator) > (frac.numerator / frac.denominator)
     
 
