@@ -54,15 +54,15 @@ class FractionTest(unittest.TestCase):
         # 1 = 1/2 + -20/-40
         self.assertEqual(Fraction(1), Fraction(1, 2) + Fraction(-20, -40))
         # 0/0 = 3/0 + 3/0
-        self.assertEqual(Fraction(0,0), Fraction(3,0) + Fraction(3,0))
+        self.assertTrue(math.isnan(Fraction(3,0) + Fraction(3,0)))
         # nan = 0/0 + 2/3
         self.assertTrue(math.isnan(Fraction(0, 0) + Fraction(2, 3)))
 
     def test_sub(self):
         # 7/12 = 2/3 - 1/12
         self.assertEqual(Fraction(7,12), Fraction(2,3)-Fraction(1,12))
-        # -1/3 = 1/3 - 1/6
-        self.assertEqual(Fraction(-1,3), Fraction(1,3)-Fraction(1,6))
+        # 1/6 = 1/3 - 1/6
+        self.assertEqual(Fraction(1,6), Fraction(1,3)-Fraction(1,6))
         # 1/10 = 9/10 - 4/5
         self.assertEqual(Fraction(1,10), Fraction(9,10)-Fraction(4,5))
         # 0/0 = 3/0 - 2/0
@@ -80,7 +80,7 @@ class FractionTest(unittest.TestCase):
         # 1/3 = 2/3 * 2/4
         self.assertEqual(Fraction(1,3), Fraction(2,3) * Fraction(2,4))
         # nan = 2/4 * -1/0
-        self.assertEqual(math.isnan(Fraction(2, 4) * Fraction(-1, 0)))
+        self.assertTrue(math.isnan(Fraction(2, 4) * Fraction(-1, 0)))
 
  
 
