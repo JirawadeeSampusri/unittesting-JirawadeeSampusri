@@ -26,8 +26,6 @@ class FractionTest(unittest.TestCase):
         # r = 1
         f = Fraction(99)
         self.assertEqual("99", f.__str__())
-        f = Fraction(3, 0)
-        self.assertEqual("3/0", f.__str__())
         f = Fraction(0, 0)
         self.assertEqual("0/0", f.__str__())
 
@@ -51,10 +49,8 @@ class FractionTest(unittest.TestCase):
     def test_add(self):
         # 3/4 = 2/3 + 1/12
         self.assertEqual(Fraction(3,4), Fraction(1,12)+Fraction(2,3))
-        # 2/3 = 1/6 + 1/2
-        self.assertEqual(Fraction(2,3), Fraction(1,6)+Fraction(1,2))
-        # 1/0 = 0/3 + 3/0
-        self.assertEqual(Fraction(1,0), Fraction(0,3) + Fraction(3,0))
+        # -1/3 = 1/6 + 1/2
+        self.assertEqual(Fraction(-1,3), Fraction(1,6)+Fraction(-1,2))
         # 1 = 1/2 + -20/-40
         self.assertEqual(Fraction(1), Fraction(1, 2) + Fraction(-20, -40))
         # 0/0 = 3/0 + 3/0
@@ -65,24 +61,24 @@ class FractionTest(unittest.TestCase):
     def test_sub(self):
         # 7/12 = 2/3 - 1/12
         self.assertEqual(Fraction(7,12), Fraction(2,3)-Fraction(1,12))
-        # 1/3 = 1/2 - 1/6
-        self.assertEqual(Fraction(1,3), Fraction(1,2)-Fraction(1,6))
+        # -1/3 = 1/3 - 1/6
+        self.assertEqual(Fraction(-1,3), Fraction(1,3)-Fraction(1,6))
         # 1/10 = 9/10 - 4/5
         self.assertEqual(Fraction(1,10), Fraction(9,10)-Fraction(4,5))
         # 0/0 = 3/0 - 2/0
-        self.assertEqual(Fraction(0,0), Fraction(3,0)-Fraction(2,0))
+        self.assertTrue(math.isnan(Fraction(0,0), Fraction(3,0)-Fraction(2,0)))
         # 0/0 = 5/0 - 0/2
-        self.assertEqual(Fraction(1,0), Fraction(5,0)-Fraction(0,2))
+        self.assertTrue(math.isnan(Fraction(0,0), Fraction(5,0)-Fraction(0,2)))
 
     def test_mul(self):
         # 1/30 = 1/5 * 1/6
         self.assertEqual(Fraction(1,30), Fraction(1,5) * Fraction(1,6))
         # 1/21 = 2/7 * 1/6
         self.assertEqual(Fraction(1,21), Fraction(2,7) * Fraction(1,6))
+        # -1/12 = 1/2 * 1/6
+        self.assertEqual(Fraction(-1,12), Fraction(-1,2) * Fraction(1,6))
         # 1/3 = 2/3 * 2/4
         self.assertEqual(Fraction(1,3), Fraction(2,3) * Fraction(2,4))
-        # 1/0 = 3/0 * -1/4
-        self.assertEqual(Fraction(1,0), Fraction(2,0) * Fraction(4,6))
         # nan = 2/4 * -1/0
         self.assertEqual(math.isnan(Fraction(2, 4) * Fraction(-1, 0)))
 
