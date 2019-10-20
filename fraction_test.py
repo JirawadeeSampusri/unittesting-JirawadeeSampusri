@@ -66,9 +66,9 @@ class FractionTest(unittest.TestCase):
         # 1/10 = 9/10 - 4/5
         self.assertEqual(Fraction(1,10), Fraction(9,10)-Fraction(4,5))
         # 0/0 = 3/0 - 2/0
-        self.assertTrue(math.isnan(Fraction(0,0), Fraction(3,0)-Fraction(2,0)))
+        self.assertTrue(math.isnan(Fraction(3,0)-Fraction(2,0)))
         # 0/0 = 5/0 - 0/2
-        self.assertTrue(math.isnan(Fraction(0,0), Fraction(5,0)-Fraction(0,2)))
+        self.assertTrue(math.isnan( Fraction(5,0)-Fraction(0,2)))
 
     def test_mul(self):
         # 1/30 = 1/5 * 1/6
