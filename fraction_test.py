@@ -18,16 +18,30 @@ class FractionTest(unittest.TestCase):
         self.assertEqual("25", f.__str__())
         f = Fraction(1500, 90)
         self.assertEqual("50/3", f.__str__())
+        f = Fraction(-60, 20)
+        self.assertEqual("-3", f.__str__())
+        f = Fraction(36, -48)
+        self.assertEqual("-3/4", f.__str__())
         # Constructor should provide default denominato
         # r = 1
         f = Fraction(99)
         self.assertEqual("99", f.__str__())
+        f = Fraction(3, 0)
+        self.assertEqual("3/0", f.__str__())
+        f = Fraction(0, 0)
+        self.assertEqual("0/0", f.__str__())
 
     def test_init(self):
         f = Fraction(3)
         self.assertEqual(3, f.numerator)
+        f = Fraction(3)
+        self.assertEqual(1, f.denominator)
         f = Fraction(-2, 3)
         self.assertEqual(-2, f.numerator)
+        f = Fraction(1, -2)
+        self.assertEqual(-2, f.denominator)
+        f = Fraction(-5, -6)
+        self.assertEqual(5, f.numerator)
         f = Fraction(0, 0)
         self.assertEqual(0, f.numerator)
 
@@ -41,6 +55,8 @@ class FractionTest(unittest.TestCase):
         self.assertEqual(Fraction(2,3), Fraction(1,6)+Fraction(1,2))
         # 1/0 = 0/3 + 3/0
         self.assertEqual(Fraction(1,0), Fraction(0,3) + Fraction(3,0))
+        # 1 = 1/2 + -20/-40
+        self.assertEqual(Fraction(1), Fraction(1, 2) + Fraction(-20, -40))
         # 0/0 = 3/0 + 3/0
         self.assertEqual(Fraction(0,0), Fraction(3,0) + Fraction(3,0))
         # 0/0 = 3/0 + -3,0
